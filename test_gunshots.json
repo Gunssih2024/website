@@ -1,0 +1,1353 @@
+{
+    "1": {
+        "fpga_id": "100001",
+        "elevation": 263,
+        "direction": 268,
+        "date": "16-12-2021",
+        "time": "00:09:56"
+    },
+    "2": {
+        "fpga_id": "100001",
+        "elevation": -249,
+        "direction": 111,
+        "date": "13-04-2024",
+        "time": "04:19:26"
+    },
+    "3": {
+        "fpga_id": "100001",
+        "elevation": -112,
+        "direction": 225,
+        "date": "24-05-2021",
+        "time": "19:45:23"
+    },
+    "4": {
+        "fpga_id": "100001",
+        "elevation": -123,
+        "direction": 239,
+        "date": "10-06-2022",
+        "time": "18:20:43"
+    },
+    "5": {
+        "fpga_id": "100001",
+        "elevation": 110,
+        "direction": 200,
+        "date": "28-04-2022",
+        "time": "07:07:00"
+    },
+    "6": {
+        "fpga_id": "100001",
+        "elevation": 156,
+        "direction": 237,
+        "date": "13-05-2021",
+        "time": "00:44:58"
+    },
+    "7": {
+        "fpga_id": "100001",
+        "elevation": 39,
+        "direction": 147,
+        "date": "19-06-2022",
+        "time": "00:19:51"
+    },
+    "8": {
+        "fpga_id": "100001",
+        "elevation": 216,
+        "direction": 166,
+        "date": "08-09-2020",
+        "time": "00:10:51"
+    },
+    "9": {
+        "fpga_id": "100001",
+        "elevation": 218,
+        "direction": 263,
+        "date": "09-06-2023",
+        "time": "06:23:52"
+    },
+    "10": {
+        "fpga_id": "100001",
+        "elevation": 260,
+        "direction": 11,
+        "date": "16-06-2020",
+        "time": "11:24:26"
+    },
+    "11": {
+        "fpga_id": "100001",
+        "elevation": -260,
+        "direction": 297,
+        "date": "09-04-2024",
+        "time": "10:28:19"
+    },
+    "12": {
+        "fpga_id": "100001",
+        "elevation": 264,
+        "direction": 161,
+        "date": "03-09-2023",
+        "time": "14:45:19"
+    },
+    "13": {
+        "fpga_id": "100001",
+        "elevation": -182,
+        "direction": 171,
+        "date": "23-11-2020",
+        "time": "09:50:12"
+    },
+    "14": {
+        "fpga_id": "100001",
+        "elevation": -296,
+        "direction": 312,
+        "date": "21-09-2020",
+        "time": "12:15:32"
+    },
+    "15": {
+        "fpga_id": "100001",
+        "elevation": 274,
+        "direction": 47,
+        "date": "19-11-2022",
+        "time": "23:11:40"
+    },
+    "16": {
+        "fpga_id": "100002",
+        "elevation": 139,
+        "direction": 279,
+        "date": "04-06-2021",
+        "time": "15:11:04"
+    },
+    "17": {
+        "fpga_id": "100002",
+        "elevation": -114,
+        "direction": 198,
+        "date": "02-06-2023",
+        "time": "12:58:09"
+    },
+    "18": {
+        "fpga_id": "100002",
+        "elevation": 29,
+        "direction": 255,
+        "date": "17-09-2020",
+        "time": "23:40:42"
+    },
+    "19": {
+        "fpga_id": "100002",
+        "elevation": 94,
+        "direction": 318,
+        "date": "16-05-2023",
+        "time": "02:07:45"
+    },
+    "20": {
+        "fpga_id": "100002",
+        "elevation": -28,
+        "direction": 208,
+        "date": "20-09-2021",
+        "time": "04:08:30"
+    },
+    "21": {
+        "fpga_id": "100002",
+        "elevation": -102,
+        "direction": 181,
+        "date": "22-06-2024",
+        "time": "16:58:01"
+    },
+    "22": {
+        "fpga_id": "100002",
+        "elevation": -62,
+        "direction": 265,
+        "date": "11-09-2022",
+        "time": "09:15:09"
+    },
+    "23": {
+        "fpga_id": "100002",
+        "elevation": 112,
+        "direction": 71,
+        "date": "22-02-2023",
+        "time": "17:46:44"
+    },
+    "24": {
+        "fpga_id": "100002",
+        "elevation": 174,
+        "direction": 258,
+        "date": "20-09-2020",
+        "time": "15:18:19"
+    },
+    "25": {
+        "fpga_id": "100002",
+        "elevation": 62,
+        "direction": 85,
+        "date": "03-06-2022",
+        "time": "04:30:26"
+    },
+    "26": {
+        "fpga_id": "100002",
+        "elevation": -72,
+        "direction": 276,
+        "date": "17-03-2023",
+        "time": "19:10:21"
+    },
+    "27": {
+        "fpga_id": "100002",
+        "elevation": -195,
+        "direction": 305,
+        "date": "03-08-2023",
+        "time": "16:06:15"
+    },
+    "28": {
+        "fpga_id": "100002",
+        "elevation": -74,
+        "direction": 217,
+        "date": "16-07-2024",
+        "time": "20:28:02"
+    },
+    "29": {
+        "fpga_id": "100002",
+        "elevation": -299,
+        "direction": 174,
+        "date": "30-05-2020",
+        "time": "20:36:20"
+    },
+    "30": {
+        "fpga_id": "100002",
+        "elevation": -180,
+        "direction": 218,
+        "date": "04-07-2024",
+        "time": "08:03:15"
+    },
+    "31": {
+        "fpga_id": "100002",
+        "elevation": 238,
+        "direction": 215,
+        "date": "12-12-2022",
+        "time": "03:32:39"
+    },
+    "32": {
+        "fpga_id": "100002",
+        "elevation": -86,
+        "direction": 220,
+        "date": "02-09-2022",
+        "time": "23:26:00"
+    },
+    "33": {
+        "fpga_id": "100002",
+        "elevation": -266,
+        "direction": 113,
+        "date": "12-06-2021",
+        "time": "21:34:29"
+    },
+    "34": {
+        "fpga_id": "100002",
+        "elevation": 182,
+        "direction": 17,
+        "date": "29-01-2024",
+        "time": "11:42:43"
+    },
+    "35": {
+        "fpga_id": "100002",
+        "elevation": -81,
+        "direction": 326,
+        "date": "15-12-2021",
+        "time": "10:11:01"
+    },
+    "36": {
+        "fpga_id": "100002",
+        "elevation": -46,
+        "direction": 2,
+        "date": "26-10-2022",
+        "time": "20:02:26"
+    },
+    "37": {
+        "fpga_id": "100002",
+        "elevation": 166,
+        "direction": 316,
+        "date": "10-02-2022",
+        "time": "09:20:42"
+    },
+    "38": {
+        "fpga_id": "100002",
+        "elevation": -264,
+        "direction": 178,
+        "date": "12-05-2024",
+        "time": "14:33:24"
+    },
+    "39": {
+        "fpga_id": "100002",
+        "elevation": 118,
+        "direction": 28,
+        "date": "04-12-2023",
+        "time": "02:38:34"
+    },
+    "40": {
+        "fpga_id": "100002",
+        "elevation": -183,
+        "direction": 165,
+        "date": "16-10-2021",
+        "time": "00:42:43"
+    },
+    "41": {
+        "fpga_id": "100002",
+        "elevation": -43,
+        "direction": 199,
+        "date": "09-06-2024",
+        "time": "12:46:58"
+    },
+    "42": {
+        "fpga_id": "100002",
+        "elevation": 176,
+        "direction": 2,
+        "date": "15-05-2021",
+        "time": "14:43:31"
+    },
+    "43": {
+        "fpga_id": "100002",
+        "elevation": -94,
+        "direction": 259,
+        "date": "03-08-2022",
+        "time": "01:25:06"
+    },
+    "44": {
+        "fpga_id": "100002",
+        "elevation": -23,
+        "direction": 147,
+        "date": "09-11-2022",
+        "time": "00:36:51"
+    },
+    "45": {
+        "fpga_id": "100002",
+        "elevation": -88,
+        "direction": 234,
+        "date": "22-03-2021",
+        "time": "00:21:03"
+    },
+    "46": {
+        "fpga_id": "100002",
+        "elevation": 25,
+        "direction": 305,
+        "date": "31-12-2022",
+        "time": "20:42:12"
+    },
+    "47": {
+        "fpga_id": "100002",
+        "elevation": -3,
+        "direction": 322,
+        "date": "18-06-2022",
+        "time": "22:54:24"
+    },
+    "48": {
+        "fpga_id": "100002",
+        "elevation": -50,
+        "direction": 264,
+        "date": "17-05-2020",
+        "time": "16:34:01"
+    },
+    "49": {
+        "fpga_id": "100002",
+        "elevation": -170,
+        "direction": 208,
+        "date": "31-10-2022",
+        "time": "19:20:52"
+    },
+    "50": {
+        "fpga_id": "100002",
+        "elevation": 185,
+        "direction": 91,
+        "date": "13-02-2023",
+        "time": "16:10:57"
+    },
+    "51": {
+        "fpga_id": "100002",
+        "elevation": -60,
+        "direction": 246,
+        "date": "05-01-2023",
+        "time": "12:47:17"
+    },
+    "52": {
+        "fpga_id": "100002",
+        "elevation": 153,
+        "direction": 354,
+        "date": "23-05-2020",
+        "time": "02:10:01"
+    },
+    "53": {
+        "fpga_id": "100002",
+        "elevation": -261,
+        "direction": 320,
+        "date": "05-09-2024",
+        "time": "14:15:05"
+    },
+    "54": {
+        "fpga_id": "100002",
+        "elevation": 64,
+        "direction": 60,
+        "date": "23-01-2022",
+        "time": "00:42:55"
+    },
+    "55": {
+        "fpga_id": "100002",
+        "elevation": -121,
+        "direction": 249,
+        "date": "13-01-2023",
+        "time": "23:14:27"
+    },
+    "56": {
+        "fpga_id": "100002",
+        "elevation": -78,
+        "direction": 58,
+        "date": "12-05-2021",
+        "time": "16:26:28"
+    },
+    "57": {
+        "fpga_id": "100002",
+        "elevation": 268,
+        "direction": 126,
+        "date": "09-09-2021",
+        "time": "19:56:53"
+    },
+    "58": {
+        "fpga_id": "100002",
+        "elevation": -177,
+        "direction": 45,
+        "date": "23-09-2022",
+        "time": "03:20:15"
+    },
+    "59": {
+        "fpga_id": "100002",
+        "elevation": 208,
+        "direction": 191,
+        "date": "18-09-2020",
+        "time": "04:15:28"
+    },
+    "60": {
+        "fpga_id": "100002",
+        "elevation": 152,
+        "direction": 77,
+        "date": "31-01-2024",
+        "time": "00:04:44"
+    },
+    "61": {
+        "fpga_id": "100003",
+        "elevation": -284,
+        "direction": 219,
+        "date": "25-06-2020",
+        "time": "03:52:57"
+    },
+    "62": {
+        "fpga_id": "100003",
+        "elevation": 81,
+        "direction": 211,
+        "date": "21-03-2022",
+        "time": "05:36:32"
+    },
+    "63": {
+        "fpga_id": "100003",
+        "elevation": -113,
+        "direction": 146,
+        "date": "01-11-2022",
+        "time": "13:00:56"
+    },
+    "64": {
+        "fpga_id": "100003",
+        "elevation": 85,
+        "direction": 21,
+        "date": "15-09-2021",
+        "time": "03:10:23"
+    },
+    "65": {
+        "fpga_id": "100003",
+        "elevation": -170,
+        "direction": 257,
+        "date": "09-03-2022",
+        "time": "00:02:49"
+    },
+    "66": {
+        "fpga_id": "100003",
+        "elevation": -34,
+        "direction": 310,
+        "date": "01-08-2022",
+        "time": "19:01:10"
+    },
+    "67": {
+        "fpga_id": "100003",
+        "elevation": 213,
+        "direction": 31,
+        "date": "25-01-2023",
+        "time": "14:02:08"
+    },
+    "68": {
+        "fpga_id": "100003",
+        "elevation": -74,
+        "direction": 343,
+        "date": "22-07-2022",
+        "time": "17:25:46"
+    },
+    "69": {
+        "fpga_id": "100003",
+        "elevation": 133,
+        "direction": 147,
+        "date": "22-06-2021",
+        "time": "07:55:14"
+    },
+    "70": {
+        "fpga_id": "100003",
+        "elevation": -31,
+        "direction": 237,
+        "date": "24-09-2020",
+        "time": "21:21:40"
+    },
+    "71": {
+        "fpga_id": "100003",
+        "elevation": 239,
+        "direction": 241,
+        "date": "19-06-2022",
+        "time": "20:49:08"
+    },
+    "72": {
+        "fpga_id": "100003",
+        "elevation": 0,
+        "direction": 105,
+        "date": "25-09-2023",
+        "time": "02:35:54"
+    },
+    "73": {
+        "fpga_id": "100003",
+        "elevation": -24,
+        "direction": 321,
+        "date": "25-01-2024",
+        "time": "00:43:37"
+    },
+    "74": {
+        "fpga_id": "100003",
+        "elevation": 212,
+        "direction": 355,
+        "date": "19-04-2021",
+        "time": "21:45:41"
+    },
+    "75": {
+        "fpga_id": "100003",
+        "elevation": 262,
+        "direction": 359,
+        "date": "09-07-2024",
+        "time": "14:56:53"
+    },
+    "76": {
+        "fpga_id": "100003",
+        "elevation": -144,
+        "direction": 161,
+        "date": "14-05-2021",
+        "time": "04:40:34"
+    },
+    "77": {
+        "fpga_id": "100003",
+        "elevation": -186,
+        "direction": 337,
+        "date": "02-10-2021",
+        "time": "11:59:11"
+    },
+    "78": {
+        "fpga_id": "100003",
+        "elevation": -139,
+        "direction": 123,
+        "date": "24-07-2020",
+        "time": "13:13:50"
+    },
+    "79": {
+        "fpga_id": "100003",
+        "elevation": 134,
+        "direction": 11,
+        "date": "02-10-2022",
+        "time": "15:23:04"
+    },
+    "80": {
+        "fpga_id": "100003",
+        "elevation": 144,
+        "direction": 194,
+        "date": "04-07-2021",
+        "time": "02:48:47"
+    },
+    "81": {
+        "fpga_id": "100003",
+        "elevation": -257,
+        "direction": 236,
+        "date": "23-01-2021",
+        "time": "19:44:43"
+    },
+    "82": {
+        "fpga_id": "100003",
+        "elevation": -9,
+        "direction": 71,
+        "date": "27-05-2024",
+        "time": "23:49:16"
+    },
+    "83": {
+        "fpga_id": "100003",
+        "elevation": -88,
+        "direction": 110,
+        "date": "08-09-2021",
+        "time": "01:19:36"
+    },
+    "84": {
+        "fpga_id": "100003",
+        "elevation": -77,
+        "direction": 64,
+        "date": "22-02-2022",
+        "time": "07:04:32"
+    },
+    "85": {
+        "fpga_id": "100003",
+        "elevation": -165,
+        "direction": 266,
+        "date": "10-09-2023",
+        "time": "10:59:31"
+    },
+    "86": {
+        "fpga_id": "100003",
+        "elevation": 62,
+        "direction": 205,
+        "date": "29-09-2020",
+        "time": "13:49:08"
+    },
+    "87": {
+        "fpga_id": "100003",
+        "elevation": 197,
+        "direction": 126,
+        "date": "15-06-2021",
+        "time": "05:06:49"
+    },
+    "88": {
+        "fpga_id": "100003",
+        "elevation": 78,
+        "direction": 260,
+        "date": "02-03-2021",
+        "time": "14:29:02"
+    },
+    "89": {
+        "fpga_id": "100003",
+        "elevation": -187,
+        "direction": 60,
+        "date": "13-04-2021",
+        "time": "12:10:59"
+    },
+    "90": {
+        "fpga_id": "100003",
+        "elevation": -175,
+        "direction": 227,
+        "date": "26-09-2022",
+        "time": "15:25:14"
+    },
+    "91": {
+        "fpga_id": "100003",
+        "elevation": 296,
+        "direction": 225,
+        "date": "01-10-2023",
+        "time": "11:32:48"
+    },
+    "92": {
+        "fpga_id": "100003",
+        "elevation": -91,
+        "direction": 128,
+        "date": "08-03-2022",
+        "time": "16:54:41"
+    },
+    "93": {
+        "fpga_id": "100003",
+        "elevation": 281,
+        "direction": 65,
+        "date": "10-04-2023",
+        "time": "19:08:53"
+    },
+    "94": {
+        "fpga_id": "100003",
+        "elevation": -19,
+        "direction": 176,
+        "date": "31-07-2022",
+        "time": "04:31:16"
+    },
+    "95": {
+        "fpga_id": "100003",
+        "elevation": 125,
+        "direction": 75,
+        "date": "14-01-2023",
+        "time": "02:32:57"
+    },
+    "96": {
+        "fpga_id": "100003",
+        "elevation": 26,
+        "direction": 137,
+        "date": "29-03-2023",
+        "time": "00:48:08"
+    },
+    "97": {
+        "fpga_id": "100003",
+        "elevation": 120,
+        "direction": 190,
+        "date": "03-05-2022",
+        "time": "01:58:10"
+    },
+    "98": {
+        "fpga_id": "100003",
+        "elevation": -44,
+        "direction": 51,
+        "date": "28-07-2022",
+        "time": "18:23:44"
+    },
+    "99": {
+        "fpga_id": "100003",
+        "elevation": -46,
+        "direction": 237,
+        "date": "03-08-2024",
+        "time": "12:25:23"
+    },
+    "100": {
+        "fpga_id": "100003",
+        "elevation": 44,
+        "direction": 321,
+        "date": "31-01-2024",
+        "time": "23:23:00"
+    },
+    "101": {
+        "fpga_id": "100003",
+        "elevation": -168,
+        "direction": 315,
+        "date": "18-06-2021",
+        "time": "17:07:14"
+    },
+    "102": {
+        "fpga_id": "100003",
+        "elevation": -110,
+        "direction": 111,
+        "date": "21-05-2024",
+        "time": "06:43:37"
+    },
+    "103": {
+        "fpga_id": "100003",
+        "elevation": 157,
+        "direction": 90,
+        "date": "14-12-2023",
+        "time": "17:43:45"
+    },
+    "104": {
+        "fpga_id": "100003",
+        "elevation": 9,
+        "direction": 234,
+        "date": "27-04-2023",
+        "time": "04:26:48"
+    },
+    "105": {
+        "fpga_id": "100003",
+        "elevation": 30,
+        "direction": 135,
+        "date": "06-09-2021",
+        "time": "10:45:11"
+    },
+    "106": {
+        "fpga_id": "100003",
+        "elevation": 120,
+        "direction": 53,
+        "date": "28-10-2021",
+        "time": "21:20:10"
+    },
+    "107": {
+        "fpga_id": "100003",
+        "elevation": -175,
+        "direction": 28,
+        "date": "12-04-2024",
+        "time": "04:25:55"
+    },
+    "108": {
+        "fpga_id": "100003",
+        "elevation": 76,
+        "direction": 252,
+        "date": "14-10-2021",
+        "time": "13:55:32"
+    },
+    "109": {
+        "fpga_id": "100003",
+        "elevation": 4,
+        "direction": 102,
+        "date": "17-07-2024",
+        "time": "21:10:59"
+    },
+    "110": {
+        "fpga_id": "100003",
+        "elevation": 297,
+        "direction": 13,
+        "date": "08-11-2022",
+        "time": "09:42:08"
+    },
+    "111": {
+        "fpga_id": "100003",
+        "elevation": -257,
+        "direction": 26,
+        "date": "17-09-2021",
+        "time": "14:12:58"
+    },
+    "112": {
+        "fpga_id": "100003",
+        "elevation": -15,
+        "direction": 129,
+        "date": "14-09-2023",
+        "time": "13:19:49"
+    },
+    "113": {
+        "fpga_id": "100003",
+        "elevation": 102,
+        "direction": 303,
+        "date": "07-06-2021",
+        "time": "12:28:37"
+    },
+    "114": {
+        "fpga_id": "100003",
+        "elevation": 156,
+        "direction": 197,
+        "date": "15-01-2021",
+        "time": "00:58:31"
+    },
+    "115": {
+        "fpga_id": "100003",
+        "elevation": 197,
+        "direction": 41,
+        "date": "14-10-2022",
+        "time": "22:55:15"
+    },
+    "116": {
+        "fpga_id": "100003",
+        "elevation": 27,
+        "direction": 40,
+        "date": "27-08-2023",
+        "time": "03:49:06"
+    },
+    "117": {
+        "fpga_id": "100003",
+        "elevation": 207,
+        "direction": 204,
+        "date": "22-10-2022",
+        "time": "18:36:55"
+    },
+    "118": {
+        "fpga_id": "100003",
+        "elevation": -33,
+        "direction": 183,
+        "date": "08-06-2021",
+        "time": "14:57:03"
+    },
+    "119": {
+        "fpga_id": "100003",
+        "elevation": -168,
+        "direction": 285,
+        "date": "29-09-2021",
+        "time": "08:23:18"
+    },
+    "120": {
+        "fpga_id": "100003",
+        "elevation": -276,
+        "direction": 100,
+        "date": "16-08-2020",
+        "time": "00:00:58"
+    },
+    "121": {
+        "fpga_id": "100003",
+        "elevation": -243,
+        "direction": 283,
+        "date": "25-06-2020",
+        "time": "11:12:38"
+    },
+    "122": {
+        "fpga_id": "100003",
+        "elevation": -52,
+        "direction": 205,
+        "date": "08-03-2023",
+        "time": "02:58:28"
+    },
+    "123": {
+        "fpga_id": "100003",
+        "elevation": 233,
+        "direction": 143,
+        "date": "03-04-2021",
+        "time": "13:51:53"
+    },
+    "124": {
+        "fpga_id": "100003",
+        "elevation": -137,
+        "direction": 20,
+        "date": "01-02-2021",
+        "time": "21:15:57"
+    },
+    "125": {
+        "fpga_id": "100003",
+        "elevation": 7,
+        "direction": 329,
+        "date": "07-11-2020",
+        "time": "01:27:40"
+    },
+    "126": {
+        "fpga_id": "100003",
+        "elevation": 3,
+        "direction": 102,
+        "date": "04-01-2024",
+        "time": "15:34:09"
+    },
+    "127": {
+        "fpga_id": "100003",
+        "elevation": 22,
+        "direction": 55,
+        "date": "02-07-2022",
+        "time": "10:12:59"
+    },
+    "128": {
+        "fpga_id": "100003",
+        "elevation": -3,
+        "direction": 256,
+        "date": "02-05-2020",
+        "time": "17:47:53"
+    },
+    "129": {
+        "fpga_id": "100003",
+        "elevation": -265,
+        "direction": 22,
+        "date": "12-10-2020",
+        "time": "21:49:02"
+    },
+    "130": {
+        "fpga_id": "100003",
+        "elevation": 11,
+        "direction": 188,
+        "date": "05-08-2022",
+        "time": "14:40:11"
+    },
+    "131": {
+        "fpga_id": "100003",
+        "elevation": 213,
+        "direction": 145,
+        "date": "23-05-2022",
+        "time": "12:56:43"
+    },
+    "132": {
+        "fpga_id": "100003",
+        "elevation": 178,
+        "direction": 279,
+        "date": "26-11-2021",
+        "time": "16:28:49"
+    },
+    "133": {
+        "fpga_id": "100003",
+        "elevation": 243,
+        "direction": 285,
+        "date": "29-10-2023",
+        "time": "13:34:05"
+    },
+    "134": {
+        "fpga_id": "100003",
+        "elevation": 182,
+        "direction": 136,
+        "date": "21-10-2023",
+        "time": "15:35:48"
+    },
+    "135": {
+        "fpga_id": "100003",
+        "elevation": 62,
+        "direction": 214,
+        "date": "27-04-2022",
+        "time": "01:28:44"
+    },
+    "136": {
+        "fpga_id": "100003",
+        "elevation": 238,
+        "direction": 224,
+        "date": "25-09-2021",
+        "time": "07:54:00"
+    },
+    "137": {
+        "fpga_id": "100003",
+        "elevation": 53,
+        "direction": 360,
+        "date": "13-07-2023",
+        "time": "19:00:50"
+    },
+    "138": {
+        "fpga_id": "100003",
+        "elevation": -175,
+        "direction": 199,
+        "date": "09-03-2024",
+        "time": "18:41:59"
+    },
+    "139": {
+        "fpga_id": "100004",
+        "elevation": -289,
+        "direction": 182,
+        "date": "19-12-2022",
+        "time": "00:13:19"
+    },
+    "140": {
+        "fpga_id": "100004",
+        "elevation": 299,
+        "direction": 110,
+        "date": "27-10-2022",
+        "time": "22:03:31"
+    },
+    "141": {
+        "fpga_id": "100004",
+        "elevation": -207,
+        "direction": 106,
+        "date": "02-06-2021",
+        "time": "06:43:47"
+    },
+    "142": {
+        "fpga_id": "100004",
+        "elevation": -62,
+        "direction": 157,
+        "date": "25-05-2022",
+        "time": "07:13:26"
+    },
+    "143": {
+        "fpga_id": "100004",
+        "elevation": -20,
+        "direction": 110,
+        "date": "17-04-2022",
+        "time": "01:25:46"
+    },
+    "144": {
+        "fpga_id": "100004",
+        "elevation": 14,
+        "direction": 147,
+        "date": "06-02-2022",
+        "time": "14:02:04"
+    },
+    "145": {
+        "fpga_id": "100004",
+        "elevation": 164,
+        "direction": 158,
+        "date": "19-08-2022",
+        "time": "10:27:21"
+    },
+    "146": {
+        "fpga_id": "100004",
+        "elevation": -123,
+        "direction": 58,
+        "date": "05-03-2024",
+        "time": "05:33:39"
+    },
+    "147": {
+        "fpga_id": "100004",
+        "elevation": 291,
+        "direction": 286,
+        "date": "15-12-2022",
+        "time": "17:01:07"
+    },
+    "148": {
+        "fpga_id": "100004",
+        "elevation": 107,
+        "direction": 243,
+        "date": "27-10-2022",
+        "time": "05:44:59"
+    },
+    "149": {
+        "fpga_id": "100004",
+        "elevation": 280,
+        "direction": 219,
+        "date": "03-09-2024",
+        "time": "12:27:27"
+    },
+    "150": {
+        "fpga_id": "100004",
+        "elevation": -70,
+        "direction": 201,
+        "date": "28-01-2024",
+        "time": "01:15:35"
+    },
+    "151": {
+        "fpga_id": "100005",
+        "elevation": -42,
+        "direction": 128,
+        "date": "18-02-2024",
+        "time": "18:44:39"
+    },
+    "152": {
+        "fpga_id": "100005",
+        "elevation": 138,
+        "direction": 204,
+        "date": "05-06-2020",
+        "time": "04:02:34"
+    },
+    "153": {
+        "fpga_id": "100005",
+        "elevation": -179,
+        "direction": 263,
+        "date": "06-01-2024",
+        "time": "01:30:36"
+    },
+    "154": {
+        "fpga_id": "100005",
+        "elevation": -17,
+        "direction": 51,
+        "date": "10-12-2022",
+        "time": "05:05:15"
+    },
+    "155": {
+        "fpga_id": "100005",
+        "elevation": -214,
+        "direction": 62,
+        "date": "06-02-2021",
+        "time": "06:07:44"
+    },
+    "156": {
+        "fpga_id": "100005",
+        "elevation": -162,
+        "direction": 282,
+        "date": "29-06-2022",
+        "time": "11:24:33"
+    },
+    "157": {
+        "fpga_id": "100005",
+        "elevation": 60,
+        "direction": 192,
+        "date": "16-04-2021",
+        "time": "16:51:32"
+    },
+    "158": {
+        "fpga_id": "100005",
+        "elevation": -141,
+        "direction": 115,
+        "date": "23-05-2022",
+        "time": "23:53:34"
+    },
+    "159": {
+        "fpga_id": "100005",
+        "elevation": 179,
+        "direction": 269,
+        "date": "22-02-2021",
+        "time": "17:47:49"
+    },
+    "160": {
+        "fpga_id": "100005",
+        "elevation": 173,
+        "direction": 81,
+        "date": "18-02-2023",
+        "time": "19:21:00"
+    },
+    "161": {
+        "fpga_id": "100005",
+        "elevation": -186,
+        "direction": 11,
+        "date": "16-06-2021",
+        "time": "15:03:45"
+    },
+    "162": {
+        "fpga_id": "100005",
+        "elevation": 206,
+        "direction": 280,
+        "date": "21-01-2024",
+        "time": "18:14:46"
+    },
+    "163": {
+        "fpga_id": "100005",
+        "elevation": -183,
+        "direction": 291,
+        "date": "27-04-2022",
+        "time": "05:16:24"
+    },
+    "164": {
+        "fpga_id": "100005",
+        "elevation": -175,
+        "direction": 144,
+        "date": "25-07-2023",
+        "time": "02:40:45"
+    },
+    "165": {
+        "fpga_id": "100005",
+        "elevation": -295,
+        "direction": 51,
+        "date": "26-12-2020",
+        "time": "18:25:46"
+    },
+    "166": {
+        "fpga_id": "100005",
+        "elevation": 238,
+        "direction": 2,
+        "date": "28-01-2020",
+        "time": "03:58:08"
+    },
+    "167": {
+        "fpga_id": "100005",
+        "elevation": -187,
+        "direction": 73,
+        "date": "06-04-2022",
+        "time": "22:46:02"
+    },
+    "168": {
+        "fpga_id": "100005",
+        "elevation": -211,
+        "direction": 131,
+        "date": "16-02-2023",
+        "time": "13:58:08"
+    },
+    "169": {
+        "fpga_id": "100005",
+        "elevation": -167,
+        "direction": 254,
+        "date": "23-09-2022",
+        "time": "21:02:55"
+    },
+    "170": {
+        "fpga_id": "100005",
+        "elevation": -85,
+        "direction": 76,
+        "date": "22-03-2024",
+        "time": "23:56:22"
+    },
+    "171": {
+        "fpga_id": "100005",
+        "elevation": 151,
+        "direction": 358,
+        "date": "14-09-2020",
+        "time": "21:19:37"
+    },
+    "172": {
+        "fpga_id": "100005",
+        "elevation": 270,
+        "direction": 155,
+        "date": "16-01-2024",
+        "time": "23:26:40"
+    },
+    "173": {
+        "fpga_id": "100005",
+        "elevation": -86,
+        "direction": 244,
+        "date": "03-12-2021",
+        "time": "15:10:29"
+    },
+    "174": {
+        "fpga_id": "100005",
+        "elevation": -228,
+        "direction": 354,
+        "date": "09-08-2020",
+        "time": "08:55:05"
+    },
+    "175": {
+        "fpga_id": "100005",
+        "elevation": -63,
+        "direction": 255,
+        "date": "04-08-2021",
+        "time": "07:54:52"
+    },
+    "176": {
+        "fpga_id": "100005",
+        "elevation": 122,
+        "direction": 59,
+        "date": "03-12-2022",
+        "time": "05:08:17"
+    },
+    "177": {
+        "fpga_id": "100005",
+        "elevation": 78,
+        "direction": 316,
+        "date": "08-01-2022",
+        "time": "21:22:29"
+    },
+    "178": {
+        "fpga_id": "100005",
+        "elevation": -68,
+        "direction": 214,
+        "date": "09-08-2024",
+        "time": "23:45:05"
+    },
+    "179": {
+        "fpga_id": "100005",
+        "elevation": -175,
+        "direction": 92,
+        "date": "20-06-2024",
+        "time": "07:23:24"
+    },
+    "180": {
+        "fpga_id": "100005",
+        "elevation": 157,
+        "direction": 342,
+        "date": "06-09-2021",
+        "time": "17:48:17"
+    },
+    "181": {
+        "fpga_id": "100005",
+        "elevation": -102,
+        "direction": 216,
+        "date": "29-08-2023",
+        "time": "14:47:49"
+    },
+    "182": {
+        "fpga_id": "100005",
+        "elevation": 206,
+        "direction": 187,
+        "date": "23-02-2022",
+        "time": "03:25:37"
+    },
+    "183": {
+        "fpga_id": "100005",
+        "elevation": 86,
+        "direction": 63,
+        "date": "06-02-2024",
+        "time": "15:52:44"
+    },
+    "184": {
+        "fpga_id": "100005",
+        "elevation": 241,
+        "direction": 52,
+        "date": "22-03-2022",
+        "time": "12:35:00"
+    },
+    "185": {
+        "fpga_id": "100005",
+        "elevation": 269,
+        "direction": 84,
+        "date": "29-05-2024",
+        "time": "01:54:18"
+    },
+    "186": {
+        "fpga_id": "100005",
+        "elevation": 111,
+        "direction": 138,
+        "date": "21-11-2023",
+        "time": "23:23:26"
+    },
+    "187": {
+        "fpga_id": "100005",
+        "elevation": -226,
+        "direction": 259,
+        "date": "24-06-2022",
+        "time": "22:36:32"
+    },
+    "188": {
+        "fpga_id": "100005",
+        "elevation": 63,
+        "direction": 253,
+        "date": "19-11-2020",
+        "time": "13:01:42"
+    },
+    "189": {
+        "fpga_id": "100005",
+        "elevation": -66,
+        "direction": 215,
+        "date": "12-05-2020",
+        "time": "19:41:40"
+    },
+    "190": {
+        "fpga_id": "100005",
+        "elevation": 133,
+        "direction": 312,
+        "date": "03-10-2021",
+        "time": "13:59:45"
+    },
+    "191": {
+        "fpga_id": "100005",
+        "elevation": 159,
+        "direction": 311,
+        "date": "10-02-2022",
+        "time": "10:58:59"
+    },
+    "192": {
+        "fpga_id": "100005",
+        "elevation": 215,
+        "direction": 95,
+        "date": "22-12-2020",
+        "time": "03:49:43"
+    },
+    "193": {
+        "fpga_id": "100005",
+        "elevation": 211,
+        "direction": 168,
+        "date": "30-11-2021",
+        "time": "04:17:52"
+    }
+}

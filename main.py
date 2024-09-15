@@ -4,7 +4,8 @@ from database_manager import DbManager
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'  # Replace with a strong, unique secret key
 
-dbm = DbManager("fpgas.json", "gunshots.json")
+dbm = DbManager("fpgas.json", "test_gunshots.json")
+# dbm = DbManager("fpgas.json", "gunshots.json")
 
 @app.route("/")
 def index():
