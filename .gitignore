@@ -1,3 +1,5 @@
 /venv
 fpgas.json
 gunshots.json
+test_data_populator.py
+test_gunshots.json
