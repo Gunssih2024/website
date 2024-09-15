@@ -708,6 +708,10 @@ video {
   height: 100%;
 }
 
+.h-36 {
+  height: 9rem;
+}
+
 .min-h-screen {
   min-height: 100vh;
 }

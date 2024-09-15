@@ -123,12 +123,42 @@ tbody tr:nth-child(even) {
             
             <!-- Earnings and Stats -->
             <div class="bg-gray-800 p-5 rounded-lg ">
-                <h2 class="text-xl font-bold mb-4">FPGA Overview </h2>
-                <div id="bar-chart" class=" bg-gray-700 rounded-lg overflow-x-auto">
-                    <div class="chart-container">
-                        <canvas id="myChart"></canvas>
-                    </div>
-                </div>
+
+
+                        <div class="bg-gray-800 text-gray-500 rounded   w-full h-full lg:w-full" x-data="{barChartData:barChartData()}" x-init="barChartData.fetch()">
+                            <div class="flex items-center justify-between mb-4">
+                                <h3 class="text-lg font-semibold leading-tight">  Gun Shots  </h3>
+                                <div class="relative" @click.away="barChartData.showDropdown=false">
+                                    <button class="text-xs hover:text-gray-300 flex items-center" @click="barChartData.showDropdown=!barChartData.showDropdown">
+                                        <span x-text="barChartData.options[barChartData.selectedOption].label"></span>
+                                        <i class="ml-1 mdi mdi-chevron-down"></i>
+                                    </button>
+                                    <div class="bg-gray-700 shadow-lg rounded text-sm absolute top-full right-0 min-w-full w-32 z-30 mt-1 -mr-3" x-show="barChartData.showDropdown" x-transition:enter="transition ease duration-300 transform" x-transition:enter-start="opacity-0 translate-y-2" x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease duration-300 transform" x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 translate-y-4">
+                                        <span class="absolute top-0 right-0 w-3 h-3 bg-gray-700 transform rotate-45 -mt-1 mr-3"></span>
+                                        <div class="bg-gray-700 rounded w-full relative z-10 py-1">
+                                            <ul class="list-reset text-xs">
+                                                <template x-for="(item, index) in barChartData.options">
+                                                    <li class="px-4 py-2 hover:bg-gray-600 hover:text-white transition-colors duration-100 cursor-pointer" :class="{'text-white': index === barChartData.selectedOption}" @click="barChartData.selectOption(index); barChartData.showDropdown=false">
+                                                        <span x-text="item.label"></span>
+                                                    </li>
+                                                </template>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+            
+                            <div id="bar-chart" class=" bg-gray-700 rounded-lg overflow-x-auto">
+                                <div class="chart-container ">
+                                    <canvas id="myChart" style="height: 250px;"></canvas>
+            
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                
             </div>
             
             
@@ -249,7 +279,7 @@ tbody tr:nth-child(even) {
     });
 </script>
 
-
+<!-- 
 <script>
     var ctx = document.getElementById('myChart').getContext('2d');
     var myChart = new Chart(ctx, {
@@ -307,7 +337,7 @@ tbody tr:nth-child(even) {
             }
         }
     });
-</script>
+</script> -->
 
 
 <script>
@@ -330,7 +360,6 @@ console.log(fpga_list)
 function generateDatasets(data) {
     // Get all the keys from the data object
     const keys = Object.keys(data);
-    
     // Limit the number of datasets to 10
     const maxDatasets = Math.min(keys.length, 10);
 
@@ -474,6 +503,140 @@ function hexToRgb(hex) {
     }
 </script>
     
+
+
+
+
+<script>
+
+
+
+
+    Number.prototype.comma_formatter = function() {
+        return this.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+    }
+    
+    let barChartData = function(){
+        return {
+            date: 'today',
+            options: [
+                {
+                    label: 'Today',
+                    value: 'today',
+                },
+                {
+                    label: 'Last 7 Days',
+                    value: '7days',
+                },
+                {
+                    label: 'Last 30 Days',
+                    value: '30days',
+                },
+                {
+                    label: 'Last 6 Months',
+                    value: '6months',
+                },
+                {
+                    label: 'This Year',
+                    value: 'year',
+                },
+                {
+                    label: 'last 5 Year',
+                    value: '5year',
+                },
+            ],
+            showDropdown: false,
+            selectedOption: 0,
+            selectOption: function(index){
+                this.selectedOption = index;
+                this.date = this.options[index].value;
+                this.renderbarChart();
+            },
+            data: null,
+            fetch: function(){
+                fetch('http://127.0.0.1:3000/gundata')
+                    .then(res => res.json())
+                    .then(res => {
+                        this.data = res.dates;
+                        console.log(
+                            "asdfsadf"
+                        )
+
+                        console.log(Array.from(this.data[this.date].data.values))
+                        this.renderbarChart();
+                    })
+            },
+
+            renderbarChart: function(){
+                let c = false;
+    
+                Chart.helpers.each(Chart.instances, function(instance) {
+                    if (instance.chart.canvas.id == 'myChart') {
+                        c = instance;
+                    }
+                });
+    
+                if(c) {
+                    c.destroy();
+                }
+    
+                let ctx = document.getElementById('myChart').getContext('2d');
+    
+                let chart = new Chart(ctx, {
+                    type: "bar",
+                    data: {
+                        labels: Object.keys(fpga_list),
+                        datasets: [{
+                label: 'Bar Chart',
+                data: Array.from(this.data[this.date].data.values),
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                    
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            }],
+                    },
+                    layout: {
+                        padding: {
+                            right: 10
+                        }
+                    },
+                    options: {
+        maintainAspectRatio: false, 
+
+                        scales: {
+                            
+                            yAxes: [{
+                                
+                                gridLines: {
+                                    display: false
+                                },
+                                ticks: {
+                                    callback: function(value,index,array) {
+                                        return value > 1000 ? ((value < 1000000) ? value/1000 + 'K' : value/1000000 + 'M') : value;
+                                    }
+                                }
+                            }]
+                        }
+                    }
+                });
+            }
+        }
+    }
+</script>
 {% endblock %}
 
 

@@ -6,6 +6,19 @@ from datetime import datetime, timedelta
 import calendar
 from dateutil.relativedelta import relativedelta
 
+#             start_date = today - timedelta(days=6)  # 6 days before today to include today
+#             start_date = today - timedelta(days=29)  # 29 days before today to include today
+# start_date = today.replace(day=1) - timedelta(days=1)  # End of the previous month
+
+            # for _ in range(4):  # Move back 5 months
+            #     start_date = start_date.replace(day=1) - timedelta(days=1)
+
+#             start_of_year = datetime(today.year, 1, 1)
+#             start_date = datetime(today.year - 5, 1, 1)
+
+
+
+
 def convert_gunshot_data(gunshot_list: Dict, fpgas_list: Dict) -> Dict:
     # Convert string dates to datetime objects
     def parse_date(date_str):
@@ -522,7 +535,88 @@ def convert_gunshot_data(gunshot_list: Dict, fpgas_list: Dict) -> Dict:
     }
 
 
+def calculate_gunshot_data(gunshot_list: Dict, fpgas_list: Dict):
+    # Initialize counters
+    today_counter = {fpga_id: 0 for fpga_id in fpgas_list.keys()}
+    seven_days_counter = {fpga_id: 0 for fpga_id in fpgas_list.keys()}
+    thirty_days_counter = {fpga_id: 0 for fpga_id in fpgas_list.keys()}
+    six_months_counter = {fpga_id: 0 for fpga_id in fpgas_list.keys()}
+    this_year_counter = {fpga_id: 0 for fpga_id in fpgas_list.keys()}
+    five_years_counter = {fpga_id: 0 for fpga_id in fpgas_list.keys()}
+    
+    # Get today's date
+    today = datetime.now().date()
+    seven_days_ago = today - timedelta(days=6)
+    thirty_days_ago = today - timedelta(days=29)
+    six_months_ago = today.replace(day=1) - timedelta(days=1)  # End of the previous month
+    for _ in range(4):  # Move back 5 months
+        six_months_ago = six_months_ago.replace(day=1) - timedelta(days=1)
+    this_year = datetime(today.year, 1, 1).date()
+    five_years_ago = datetime(today.year - 5, 1, 1).date()
+    
+    def parse_date(date_str):
+        # Convert date string to datetime object
+        return datetime.strptime(date_str, "%d-%m-%Y").date()
+    
+    for entry in gunshot_list.values():
+        fpga_id = entry["fpga_id"]
+        entry_date = parse_date(entry["date"])
+        
+        if entry_date == today:
+            today_counter[fpga_id] += 1
+        
+        if seven_days_ago <= entry_date <= today:
+            seven_days_counter[fpga_id] += 1
+        
+        if thirty_days_ago <= entry_date <= today:
+            thirty_days_counter[fpga_id] += 1
+        
+        if six_months_ago <= entry_date <= today:
+            six_months_counter[fpga_id] += 1
+        
+        if this_year <= entry_date <= today:
+            this_year_counter[fpga_id] += 1
+        
+        if five_years_ago <= entry_date <= today:
+            five_years_counter[fpga_id] += 1
+    
+    today_transformed  = {"labels": list(today_counter.keys()), "values": list(today_counter.values())}
+    seven_days_transformed = {"labels": list(seven_days_counter.keys()), "values": list(seven_days_counter.values())}
+    thirty_days_transformed = {"labels": list(thirty_days_counter.keys()), "values": list(thirty_days_counter.values())}
+    six_months_transformed = {"labels": list(six_months_counter.keys()), "values": list(six_months_counter.values())}
+    this_year_transformed = {"labels": list(this_year_counter.keys()), "values": list(this_year_counter.values())}
+    five_years_transformed = {"labels": list(five_years_counter.keys()), "values": list(five_years_counter.values())}
 
+    return {
+    "dates": {
+        "today": {
+            "data": today_transformed
+        },
+        "7days": {
+            "data": seven_days_transformed
+        },
+        "30days": {
+            "data": thirty_days_transformed
+        },
+        "6months": {
+            "data": six_months_transformed
+        },
+        "year": {
+            "data": this_year_transformed
+        },
+        "5year": {
+            "data": five_years_transformed
+        }
+    }
+}
+
+
+
+
+
+
+
+    pass
 
 class DbManager:
     def __init__(self, fpgas_file, gunshot_file) -> None:
@@ -596,13 +690,23 @@ class DbManager:
 
         return gunshot_list
     
-    def get_gunshot_specific(self) -> dict:
-        # this returns data of today, 7 days, this month, six months , year, all time
+    def get_gunshot_specific_elevation(self) -> dict:
+        # this returns elevation data of today, 7 days, this month, six months , year, 5 years
         with open(self.gunshot_file, "r") as gunshots:
             gunshot_list = json.load(gunshots)
         with open(self.fpgas_file, "r") as fpgas:
             fpgas_list = json.load(fpgas)
 
         return convert_gunshot_data(gunshot_list, fpgas_list)
+    
+    def gunshot_counter(self) -> dict:
+        # this returns gunshots data of today, 7 days, this month, six months , year, 5 years
+
+        with open(self.gunshot_file, "r") as gunshots:
+            gunshot_list = json.load(gunshots)
+        with open(self.fpgas_file, "r") as fpgas:
+            fpgas_list = json.load(fpgas)
+
+        return calculate_gunshot_data(gunshot_list, fpgas_list)
 
     # operations done on data

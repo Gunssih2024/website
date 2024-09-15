@@ -25,8 +25,9 @@ def index():
     key=lambda item: get_datetime(item[1]),
     reverse=True
     ))
-
-    dbm.get_gunshot_specific()
+    
+    # print(dbm.gunshot_counter())
+    # dbm.get_gunshot_specific()
     # print(gunshot,"hasdhfahsdfhasd",reverse_sorted_gunshot, fpga)
     return render_template("index.html", reverse_sorted_gunshot=reverse_sorted_gunshot, fpga=fpga)
 
@@ -138,10 +139,16 @@ data = {
 
 @app.route('/data', methods=['GET'])
 def get_data():
-    data = dbm.get_gunshot_specific()
+
+    data = dbm.get_gunshot_specific_elevation()
     return jsonify(data)
 
+@app.route('/gundata', methods=['GET'])
+def gun_data():
 
+    data = dbm.gunshot_counter()
+    print(data)
+    return jsonify(data)
 
 if __name__ == "__main__":
     app.run(port=3000, debug=True)
