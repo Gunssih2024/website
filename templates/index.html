@@ -311,6 +311,67 @@ tbody tr:nth-child(even) {
 
 
 <script>
+    const colors  = [
+    "#E57373", // Light Red
+    "#F06292", // Light Pink
+    "#BA68C8", // Light Purple
+    "#64B5F6", // Light Blue
+    "#4FC3F7", // Light Cyan
+    "#4DB6AC", // Light Teal
+    "#81C784", // Light Green
+    "#FFD54F", // Light Yellow
+    "#FF8A65", // Light Orange
+    "#A1887F"  // Light Brown
+];
+
+const fpga_list = {{ fpga|tojson }};
+
+console.log(fpga_list)
+function generateDatasets(data) {
+    // Get all the keys from the data object
+    const keys = Object.keys(data);
+    
+    // Limit the number of datasets to 10
+    const maxDatasets = Math.min(keys.length, 10);
+
+    // Generate the datasets
+    const datasets = [];
+    for (let i = 0; i < maxDatasets; i++) {
+        const key = keys[i];
+        const color = colors[i];
+        
+        if (key === "labels"){
+            continue;
+        }
+        console.log(fpga_list["100001"])
+        datasets.push({
+            label: `${fpga_list[key]["name"]} (${key})`,
+            backgroundColor: `rgba(${hexToRgb(color)}, 0.25)`,
+            borderColor: color,
+            pointBackgroundColor: color,
+            data: data[key],
+        });
+    }
+
+    return datasets;
+}
+
+// Helper function to convert hex to RGB
+function hexToRgb(hex) {
+    // Remove the hash at the start if it's there
+    hex = hex.replace(/^#/, '');
+
+    // Parse the r, g, b values
+    const bigint = parseInt(hex, 16);
+    const r = (bigint >> 16) & 255;
+    const g = (bigint >> 8) & 255;
+    const b = bigint & 255;
+
+    // Return RGB string
+    return `${r}, ${g}, ${b}`;
+}
+
+
 
     Number.prototype.comma_formatter = function() {
         return this.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
@@ -340,6 +401,10 @@ tbody tr:nth-child(even) {
                     label: 'This Year',
                     value: 'year',
                 },
+                {
+                    label: 'last 5 Year',
+                    value: '5year',
+                },
             ],
             showDropdown: false,
             selectedOption: 0,
@@ -350,13 +415,14 @@ tbody tr:nth-child(even) {
             },
             data: null,
             fetch: function(){
-                fetch('https://cdn.jsdelivr.net/gh/swindon/fake-api@master/tailwindAlpineJsChartJsEx1.json')
+                fetch('http://127.0.0.1:3000/data')
                     .then(res => res.json())
                     .then(res => {
                         this.data = res.dates;
                         this.renderChart();
                     })
             },
+
             renderChart: function(){
                 let c = false;
     
@@ -376,22 +442,7 @@ tbody tr:nth-child(even) {
                     type: "line",
                     data: {
                         labels: this.data[this.date].data.labels,
-                        datasets: [
-                            {
-                                label: "Income",
-                                backgroundColor: "rgba(102, 126, 234, 0.25)",
-                                borderColor: "rgba(102, 126, 234, 1)",
-                                pointBackgroundColor: "rgba(102, 126, 234, 1)",
-                                data: this.data[this.date].data.income,
-                            },
-                            {
-                                label: "Expenses",
-                                backgroundColor: "rgba(237, 100, 166, 0.25)",
-                                borderColor: "rgba(237, 100, 166, 1)",
-                                pointBackgroundColor: "rgba(237, 100, 166, 1)",
-                                data: this.data[this.date].data.expenses,
-                            },
-                        ],
+                        datasets:  generateDatasets(this.data[this.date].data),
                     },
                     layout: {
                         padding: {

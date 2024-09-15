@@ -4,6 +4,7 @@ from collections import defaultdict
 from typing import Dict, List
 from datetime import datetime, timedelta
 import calendar
+from dateutil.relativedelta import relativedelta
 
 def convert_gunshot_data(gunshot_list: Dict, fpgas_list: Dict) -> Dict:
     # Convert string dates to datetime objects
@@ -17,52 +18,57 @@ def convert_gunshot_data(gunshot_list: Dict, fpgas_list: Dict) -> Dict:
             "elevations": []
         })
         total_elevation = defaultdict(int)
-        # labels_time = ["12am", "01am", "02am", "03am", "04am", "05am", "06am", "07am", "08am", "09am", "10am", "11am", "12pm", "01pm", "02pm", "03pm", "04pm", "05pm", "06pm", "07pm", "08pm", "09pm", "10pm", "11pm"]
         if not filtered_data:
             return grouped_data, total_elevation
         
         # Group data by the specified time range
+
         if time_range == "today":
-            # elevation_by_time = {label: 0 for label in labels_time}
+
+            today = datetime.now().strftime("%d-%m-%Y")  # Format today's date as "DD-MM-YYYY"
+
             elevation_by_time_out = {}
-            # print(elevation_by_time)
-            # print("suadhfansdfoj")
-            # Process the filtered_data to update the elevations
+
             for entry in filtered_data:
-                # print(entry)
-                entry_time = datetime.strptime(entry["time"], "%H:%M:%S")
-                hour_label = entry_time.strftime("%I%p").lower()  # Convert to lowercase to match labels
-                # Check if the hour_label is in the labels dictionary
-                # print(elevation_by_time)
-                # print(hour_label, "bombastic")
-                # if hour_label in elevation_by_time:
-                if entry["fpga_id"] not in elevation_by_time_out:
-                    elevation_by_time_out[entry["fpga_id"]] = {hour_label:(entry["elevation"], 1)} 
-                else:
-                    temp_elevation = elevation_by_time_out[entry["fpga_id"]]
-                    if hour_label in temp_elevation:
-                        temp_temp_elevation, temp_itr = temp_elevation[hour_label] 
-                        temp_itr +=1
-                        temp_temp_elevation += entry["elevation"]
-                        elevation_by_time_out[entry["fpga_id"]][hour_label] = (temp_temp_elevation, temp_itr)
+                # Check if the entry date is today's date
+                if entry["date"] == today:
+                    # Process the time part of the entry
+                    entry_time = datetime.strptime(entry["time"], "%H:%M:%S")
+                    hour_label = entry_time.strftime("%I%p").lower()  # Convert to lowercase to match labels
+                    
+                    if entry["fpga_id"] not in elevation_by_time_out:
+                        elevation_by_time_out[entry["fpga_id"]] = {hour_label: (entry["elevation"], 1)} 
                     else:
-                        elevation_by_time_out[entry["fpga_id"]][hour_label] = (entry["elevation"], 1)
-
-                        # print(temp_elevation, "temp", hour_label)
-                        # temp_elevation += entry["elevation"]
-                        # temp_itr+=1
-                        # elevation_by_time_out[entry["fpga_id"]] = (temp_elevation, temp_itr)
-
-                    # elevation_by_time[hour_label] += entry["elevation"]
-                    # print("bombastic", entry["elevation"], hour_label)
+                        temp_elevation = elevation_by_time_out[entry["fpga_id"]]
+                        if hour_label in temp_elevation:
+                            temp_temp_elevation, temp_itr = temp_elevation[hour_label]
+                            temp_itr += 1
+                            temp_temp_elevation += entry["elevation"]
+                            elevation_by_time_out[entry["fpga_id"]][hour_label] = (temp_temp_elevation, temp_itr)
+                        else:
+                            elevation_by_time_out[entry["fpga_id"]][hour_label] = (entry["elevation"], 1)
             # print(elevation_by_time_out)
-
+            # second operation for today
+            # labels_time = ["12am", "01am", "02am", "03am", "04am", "05am", "06am", "07am", "08am", "09am", "10am", "11am", "12pm", "01pm", "02pm", "03pm", "04pm", "05pm", "06pm", "07pm", "08pm", "09pm", "10pm", "11pm"]
+            result = {
+                "labels":["12am", "01am", "02am", "03am", "04am", "05am", "06am", "07am", "08am", "09am", "10am", "11am", "12pm", "01pm", "02pm", "03pm", "04pm", "05pm", "06pm", "07pm", "08pm", "09pm", "10pm", "11pm"]
+            }
+            for i,y in fpgas_list.items():
+                value_list = [0] * len(result["labels"])
+                if i in elevation_by_time_out:
+                    for j,k in elevation_by_time_out[i].items():
+                        value_list[result["labels"].index(j)] = int(k[0]/k[1])
+                        # print(j,k)
+                else:
+                    pass
+                result[i] = value_list
+                # print(i, value_list)
+            # print(return_with_label)
 
 
         elif time_range == "7days":
             today = datetime.now()
 
-            # Calculate the date range for the last 7 days
             start_date = today - timedelta(days=6)  # 6 days before today to include today
             end_date = today
 
@@ -72,8 +78,6 @@ def convert_gunshot_data(gunshot_list: Dict, fpgas_list: Dict) -> Dict:
             # Define the labels for the days of the week
             day_labels = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun']
 
-            # Initialize the dictionary with the day labels
-            # Note: This initialization will be done per fpga_id inside the loop
             for entry in filtered_data:
                 fpga_id = entry["fpga_id"]
                 
@@ -110,32 +114,74 @@ def convert_gunshot_data(gunshot_list: Dict, fpgas_list: Dict) -> Dict:
                         elevation_by_fpga_id[fpga_id][day_label] = (temp_elevation, temp_count)
 
             # print(elevation_by_fpga_id)
+            
+
+
+            
+                        
+                        
+            # second operation for today
+            days_of_week = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun']
+
+            result = {
+                'labels': days_of_week,
+            }
+
+            # Find the first day in the first key's data
+            first_key = next(iter(elevation_by_fpga_id))
+            first_day_index = days_of_week.index(next(day for day in days_of_week if day in elevation_by_fpga_id[first_key]))
+
+
+            for key,y in fpgas_list.items():
+                value_list = [0] * len(days_of_week)
+                
+                if key in elevation_by_fpga_id.keys():
+                    for day, (value, _) in elevation_by_fpga_id[key].items():
+                        day_index = days_of_week.index(day)
+                        value_list[day_index] = int(value / _) if _ != 0 else value
+                else:
+                    pass
+
+                # Shift the list to align with the first day's index
+                value_list = value_list[first_day_index:] + value_list[:first_day_index]
+                result[key] = value_list
 
 
 
+            # for key, day_data in elevation_by_fpga_id.items():
+            #     # Initialize value list with 0s
+            #     value_list = [0] * len(days_of_week)
+                
+            #     for day, (value, _) in elevation_by_time_out[key].items():
+            #         day_index = days_of_week.index(day)
+            #         value_list[day_index] = int(value)
 
-    
-        # elif time_range == "7days":
-        #     end_date = datetime.now().date()
-        #     start_date = end_date - timedelta(days=6)
-        #     for entry in filtered_data:
-        #         entry_date = parse_date(entry["date"]).date()
-        #         if start_date <= entry_date <= end_date:
-        #             day_label = entry_date.strftime("%a")
-        #             fpga_id = entry["fpga_id"]
-        #             if day_label not in grouped_data[fpga_id]["labels"]:
-        #                 grouped_data[fpga_id]["labels"].append(day_label)
-        #             index = grouped_data[fpga_id]["labels"].index(day_label)
-        #             if len(grouped_data[fpga_id]["elevations"]) <= index:
-        #                 grouped_data[fpga_id]["elevations"].extend([0] * (index + 1 - len(grouped_data[fpga_id]["elevations"])))
-        #             grouped_data[fpga_id]["elevations"][index] += entry["elevation"]
-        #             total_elevation[fpga_id] += entry["elevation"]
+            #     # Shift the list to align with the first day's index
+            #     value_list = value_list[first_day_index:] + value_list[:first_day_index]
+            #     result[key] = value_list
+
+            # print(result)
+
+            # return_with_label = {
+            #     "labels":["Mon", "01am", "02am", "03am", "04am", "05am", "06am", "07am", "08am", "09am", "10am", "11am", "12pm", "01pm", "02pm", "03pm", "04pm", "05pm", "06pm", "07pm", "08pm", "09pm", "10pm", "11pm"]
+            # }
+            
+            # for i,y in fpgas_list.items():
+            #     value_list = [0] * len(return_with_label["labels"])
+            #     if i in elevation_by_time_out:
+            #         for j,k in elevation_by_time_out[i].items():
+            #             value_list[return_with_label["labels"].index(j)] = int(k[0]/k[1])
+            #             # print(j,k)
+            #     else:
+            #         pass
+            #     return_with_label[i] = value_list
         
         elif time_range == "30days":
             today = datetime.now()
 
             # Calculate the date range for the last 30 days
             start_date = today - timedelta(days=29)  # 29 days before today to include today
+
             end_date = today
 
             # Create a dictionary to hold elevations by date for each fpga_id
@@ -170,34 +216,51 @@ def convert_gunshot_data(gunshot_list: Dict, fpgas_list: Dict) -> Dict:
                         temp_elevation += entry["elevation"]
                         elevation_by_fpga_id[fpga_id][formatted_date] = (temp_elevation, temp_count)
 
-            # print(elevation_by_fpga_id)
+            # Prepare the result dictionary for output
+            result = {
+                'labels': [date.strftime("%d-%m-%Y") for date in (start_date + timedelta(days=i) for i in range(30))],
+            }
 
-        # elif time_range == "30days":
-        #     end_date = datetime.now().date()
-        #     start_date = end_date - timedelta(days=29)
-        #     for entry in filtered_data:
-        #         entry_date = parse_date(entry["date"]).date()
-        #         if start_date <= entry_date <= end_date:
-        #             day_label = entry_date.strftime("%d")
-        #             fpga_id = entry["fpga_id"]
-        #             if day_label not in grouped_data[fpga_id]["labels"]:
-        #                 grouped_data[fpga_id]["labels"].append(day_label)
-        #             index = grouped_data[fpga_id]["labels"].index(day_label)
-        #             if len(grouped_data[fpga_id]["elevations"]) <= index:
-        #                 grouped_data[fpga_id]["elevations"].extend([0] * (index + 1 - len(grouped_data[fpga_id]["elevations"])))
-        #             grouped_data[fpga_id]["elevations"][index] += entry["elevation"]
-        #             total_elevation[fpga_id] += entry["elevation"]
+
+            for key,y in fpgas_list.items():
+                value_list = [0] * len(result['labels'])
+                
+                if key in elevation_by_fpga_id.keys():
+                    for date_str, (elevation, _) in elevation_by_fpga_id[key].items():
+                        day_index = result['labels'].index(date_str)
+                        value_list[day_index] = int(elevation / _) if _ != 0 else elevation
+                else:
+                    pass
+
+                # Shift the list to align with the first day's index
+                result[key] = value_list
+
+            # Convert the elevation data into a format where each key has a list of values for each date
+            # for key in elevation_by_fpga_id:
+            #     value_list = [0] * len(result['labels'])
+                
+            #     for date_str, (elevation, _) in elevation_by_fpga_id[key].items():
+            #         day_index = result['labels'].index(date_str)
+            #         value_list[day_index] = int(elevation)
+                
+            #     result[key] = value_list
+
+            # print(result)            # print(elevation_by_fpga_id)        
         
         elif time_range == "6months":
             today = datetime.now()
 
-            # Calculate the start of the month 6 months ago
-            six_months_ago = today - timedelta(days=180)  # Approximate 6 months
+            # Calculate the start of the month 5 months ago
+            start_date = today.replace(day=1) - timedelta(days=1)  # End of the previous month
 
-            # Calculate the start and end dates
-            start_date = six_months_ago.replace(day=1)  # First day of the month 6 months ago
-            end_date = today.replace(day=1) + timedelta(days=31)  # First day of next month, to include current month fully
+            for _ in range(4):  # Move back 5 months
+                start_date = start_date.replace(day=1) - timedelta(days=1)
+            start_date = start_date.replace(day=1)  # First day of the month 5 months ago
 
+            # Calculate the end date as the first day of the next month after today
+            
+            end_date = today   # First day of next month
+            # print(start_date)
             # Create a dictionary to hold elevations by month for each fpga_id
             elevation_by_fpga_id = {}
 
@@ -206,11 +269,13 @@ def convert_gunshot_data(gunshot_list: Dict, fpgas_list: Dict) -> Dict:
             month_labels = {}
 
             while current_date < end_date:
-                month_key = current_date.strftime("%b").lower()
+                month_key = current_date.strftime("%b-%Y").lower()  # Include the year to differentiate months across years
                 if month_key not in month_labels:
                     month_labels[month_key] = (0, 0)
-                current_date = (current_date + timedelta(days=31)).replace(day=1)  # Move to the next month
-
+                next_month = current_date.month % 12 + 1
+                next_year = current_date.year + (current_date.month // 12)
+                current_date = current_date.replace(month=next_month, year=next_year, day=1)  # Move to the next month
+            # print(month_labels)
             # Process the filtered_data to update the elevations
             for entry in filtered_data:
                 fpga_id = entry["fpga_id"]
@@ -225,33 +290,50 @@ def convert_gunshot_data(gunshot_list: Dict, fpgas_list: Dict) -> Dict:
                 # Check if the date is within the last 6 months
                 if start_date <= entry_date < end_date:
                     # Format the month to match the dictionary keys
-                    month_label = entry_date.strftime("%b").lower()  # First three letters of the month
+                    month_key = entry_date.strftime("%b-%Y").lower()  # Include the year to differentiate months across years
 
                     # Update the elevation data for the specific fpga_id and month
-                    if month_label in elevation_by_fpga_id[fpga_id]:
-                        temp_elevation, temp_count = elevation_by_fpga_id[fpga_id][month_label]
+                    if month_key in elevation_by_fpga_id[fpga_id]:
+                        temp_elevation, temp_count = elevation_by_fpga_id[fpga_id][month_key]
                         temp_count += 1
                         temp_elevation += entry["elevation"]
-                        elevation_by_fpga_id[fpga_id][month_label] = (temp_elevation, temp_count)
+                        elevation_by_fpga_id[fpga_id][month_key] = (temp_elevation, temp_count)
 
-            # print(elevation_by_fpga_id)
+            # Prepare the result dictionary for output
+            # print(month_labels.keys())
+            result = {
+                'labels': list(month_labels.keys()),  # Ensure the labels are sorted by month
+            }
 
-        # elif time_range == "6months":
-        #     end_date = datetime.now().date()
-        #     start_date = end_date - timedelta(days=180)
-        #     for entry in filtered_data:
-        #         entry_date = parse_date(entry["date"]).date()
-        #         if start_date <= entry_date <= end_date:
-        #             month_label = entry_date.strftime("%b")
-        #             fpga_id = entry["fpga_id"]
-        #             if month_label not in grouped_data[fpga_id]["labels"]:
-        #                 grouped_data[fpga_id]["labels"].append(month_label)
-        #             index = grouped_data[fpga_id]["labels"].index(month_label)
-        #             if len(grouped_data[fpga_id]["elevations"]) <= index:
-        #                 grouped_data[fpga_id]["elevations"].extend([0] * (index + 1 - len(grouped_data[fpga_id]["elevations"])))
-        #             grouped_data[fpga_id]["elevations"][index] += entry["elevation"]
-        #             total_elevation[fpga_id] += entry["elevation"]
-        
+            for key,y in fpgas_list.items():
+                value_list = [0] * len(result['labels'])
+                
+                if key in elevation_by_fpga_id.keys():
+                    for month_key, (elevation, _) in elevation_by_fpga_id[key].items():
+                        if month_key in result['labels']:
+                            month_index = result['labels'].index(month_key)
+                            value_list[month_index] = int(elevation / _) if _ != 0 else elevation
+                else:
+                    pass
+
+                # Shift the list to align with the first day's index
+                result[key] = value_list
+
+            # Convert the elevation data into a format where each key has a list of values for each month
+            # for key in elevation_by_fpga_id:
+            #     value_list = [0] * len(result['labels'])
+                
+            #     for month_key, (elevation, _) in elevation_by_fpga_id[key].items():
+            #         if month_key in result['labels']:
+            #             month_index = result['labels'].index(month_key)
+            #             value_list[month_index] = int(elevation)
+                
+            #     result[key] = value_list
+
+            # print(result)        
+
+
+
         elif time_range == "year":
             today = datetime.now()
 
@@ -297,7 +379,26 @@ def convert_gunshot_data(gunshot_list: Dict, fpgas_list: Dict) -> Dict:
                         temp_elevation += entry["elevation"]
                         elevation_by_fpga_id[fpga_id][month_label] = (temp_elevation, temp_count)
 
-            # print(elevation_by_fpga_id)
+            result = {
+                'labels': list(month_labels.keys()),  # Ensure the labels are sorted by month
+            }
+
+            for key,y in fpgas_list.items():
+                value_list = [0] * len(result['labels'])
+                
+                if key in elevation_by_fpga_id.keys():
+                    for month_key, (elevation, _) in elevation_by_fpga_id[key].items():
+                        if month_key in result['labels']:
+                            month_index = result['labels'].index(month_key)
+                            value_list[month_index] = int(elevation / _) if _ != 0 else elevation
+                else:
+                    pass
+
+                # Shift the list to align with the first day's index
+                result[key] = value_list
+
+            # print(result)
+
 
         elif time_range == "5year":
             today = datetime.now()
@@ -319,14 +420,14 @@ def convert_gunshot_data(gunshot_list: Dict, fpgas_list: Dict) -> Dict:
             # Generate quarter labels from the start date to the end date
             quarter_labels = {}
             current_date = start_date
-
+            
             while current_date <= end_date:
                 quarter_label = get_quarter_label(current_date)
                 if quarter_label not in quarter_labels:
                     quarter_labels[quarter_label] = (0, 0)
                 # Move to the next quarter
                 current_date = (current_date + timedelta(days=91)).replace(day=1)  # Move approximately 3 months ahead
-
+            # print(quarter_labels)
             # Process the filtered_data to update the elevations
             for entry in filtered_data:
                 fpga_id = entry["fpga_id"]
@@ -350,26 +451,27 @@ def convert_gunshot_data(gunshot_list: Dict, fpgas_list: Dict) -> Dict:
                         temp_elevation += entry["elevation"]
                         elevation_by_fpga_id[fpga_id][quarter_label] = (temp_elevation, temp_count)
 
-            # print(elevation_by_fpga_id)
 
+            result = {
+                'labels': list(quarter_labels.keys()),  # Ensure the labels are sorted by month
+            }
 
-        # elif time_range == "year":
-        #     end_date = datetime.now().date()
-        #     start_date = end_date - timedelta(days=365)
-        #     for entry in filtered_data:
-        #         entry_date = parse_date(entry["date"]).date()
-        #         if start_date <= entry_date <= end_date:
-        #             month_label = entry_date.strftime("%b")
-        #             fpga_id = entry["fpga_id"]
-        #             if month_label not in grouped_data[fpga_id]["labels"]:
-        #                 grouped_data[fpga_id]["labels"].append(month_label)
-        #             index = grouped_data[fpga_id]["labels"].index(month_label)
-        #             if len(grouped_data[fpga_id]["elevations"]) <= index:
-        #                 grouped_data[fpga_id]["elevations"].extend([0] * (index + 1 - len(grouped_data[fpga_id]["elevations"])))
-        #             grouped_data[fpga_id]["elevations"][index] += entry["elevation"]
-        #             total_elevation[fpga_id] += entry["elevation"]
-        
-        return grouped_data, total_elevation
+            for key,y in fpgas_list.items():
+                value_list = [0] * len(result['labels'])
+                
+                if key in elevation_by_fpga_id.keys():
+                    for quarter_key, (elevation, i) in elevation_by_fpga_id[key].items():
+                        if quarter_key in result['labels']:
+                            quarter_index = result['labels'].index(quarter_key)
+                            value_list[quarter_index] = int(elevation / i) if i != 0 else elevation
+                else:
+                    pass
+                        
+                # Shift the list to align with the first day's index
+                result[key] = value_list
+            # print(elevation_by_fpga_id,"hehe\n",result)
+
+        return result
     
     # Convert gunshot data to list
     filtered_gunshot_data = [
@@ -383,80 +485,38 @@ def convert_gunshot_data(gunshot_list: Dict, fpgas_list: Dict) -> Dict:
     ]
 
     # Calculate data for each period
-    today_data, today_total = get_elevation_data(filtered_gunshot_data, "today")
-    seven_days_data, seven_days_total = get_elevation_data(filtered_gunshot_data, "7days")
-    thirty_days_data, thirty_days_total = get_elevation_data(filtered_gunshot_data, "30days")
-    six_months_data, six_months_total = get_elevation_data(filtered_gunshot_data, "6months")
-    year_data, year_total = get_elevation_data(filtered_gunshot_data, "year")
-    five_year_data, five_year_total = get_elevation_data(filtered_gunshot_data, "5year")
-
-    # Calculate 'upDown' values
-    # def calculate_updown(current_total, previous_total):
-    #     if previous_total == 0:
-    #         return 0
-    #     return round(((current_total - previous_total) / previous_total) * 100, 1)
+    today_data = get_elevation_data(filtered_gunshot_data, "today")
+    seven_days_data = get_elevation_data(filtered_gunshot_data, "7days")
+    thirty_days_data = get_elevation_data(filtered_gunshot_data, "30days")
+    six_months_data = get_elevation_data(filtered_gunshot_data, "6months")
+    year_data = get_elevation_data(filtered_gunshot_data, "year")
+    five_year_data = get_elevation_data(filtered_gunshot_data, "5year")
     
-    def previous_total(time_range: str):
-        if time_range == "today":
-            return today_total  # There is no previous total for today
-        elif time_range == "7days":
-            return seven_days_total  # Use this as the base for previous periods
-        elif time_range == "30days":
-            return thirty_days_total
-        elif time_range == "6months":
-            return six_months_total
-        elif time_range == "year":
-            return year_total
-        elif time_range == "5year":
-            return five_year_total
-        return 0
+    # print(today_data, seven_days_data,thirty_days_data,six_months_data,year_data,five_year_data)
     
-    updated_data = {f"elevations_{fpga_id}": data["elevations"] for fpga_id, data in today_data.items()}
-    updated_data["labels"] = ["12am", "1am", "2am", "3am", "4am", "5am", "6am", "7am", "8am", "9am", "10am", "11am", "12pm", "1pm", "2pm", "3pm", "4pm", "5pm", "6pm", "7pm", "8pm", "9pm", "10pm", "11pm"]
+    # updated_data = {}
+    # updated_data = {f"elevations_{fpga_id}": data["elevations"] for fpga_id, data in today_data.items()}
+    # updated_data["labels"] = ["12am", "1am", "2am", "3am", "4am", "5am", "6am", "7am", "8am", "9am", "10am", "11am", "12pm", "1pm", "2pm", "3pm", "4pm", "5pm", "6pm", "7pm", "8pm", "9pm", "10pm", "11pm"]
     return {
         "dates": {
             "today": {
-                # "total": sum(today_data[fpga_id]["elevations"][-1] for fpga_id in today_data),
-                # "upDown": calculate_updown(
-                #     sum(today_data[fpga_id]["elevations"][-1] for fpga_id in today_data),
-                #     previous_total("7days")
-                # ),
-                "data":updated_data
+                "data":today_data
                 # "data": {f"elevations_{fpga_id}": data["elevations"] for fpga_id, data in today_data.items()}
             },
             "7days": {
-                "total": sum(seven_days_data[fpga_id]["elevations"][-1] for fpga_id in seven_days_data),
-                # "upDown": calculate_updown(
-                #     sum(seven_days_data[fpga_id]["elevations"][-1] for fpga_id in seven_days_data),
-                #     previous_total("30days")
-                # ),
-                "data": {f"elevations_{fpga_id}": data["elevations"] for fpga_id, data in seven_days_data.items()}
+                "data": seven_days_data
             },
             "30days": {
-                "total": sum(thirty_days_data[fpga_id]["elevations"][-1] for fpga_id in thirty_days_data),
-                # "upDown": calculate_updown(
-                #     sum(thirty_days_data[fpga_id]["elevations"][-1] for fpga_id in thirty_days_data),
-                #     previous_total("6months")
-                # ),
-                "data": {f"elevations_{fpga_id}": data["elevations"] for fpga_id, data in thirty_days_data.items()}
+                "data": thirty_days_data
             },
             "6months": {
-                "total": sum(six_months_data[fpga_id]["elevations"][-1] for fpga_id in six_months_data),
-                # "upDown": calculate_updown(
-                #     sum(six_months_data[fpga_id]["elevations"][-1] for fpga_id in six_months_data),
-                #     previous_total("year")
-                # ),
-                "data": {f"elevations_{fpga_id}": data["elevations"] for fpga_id, data in six_months_data.items()}
+                "data": six_months_data
             },
             "year": {
-                "total": sum(year_data[fpga_id]["elevations"][-1] for fpga_id in year_data),
-                # "upDown": 0,  # There is no upDown value for the year in this context
-                "data": {f"elevations_{fpga_id}": data["elevations"] for fpga_id, data in year_data.items()}
+                "data": year_data
             },
             "5year": {
-                "total": sum(year_data[fpga_id]["elevations"][-1] for fpga_id in five_year_data),
-                # "upDown": 0,  # There is no upDown value for the year in this context
-                "data": {f"elevations_{fpga_id}": data["elevations"] for fpga_id, data in five_year_data.items()}
+                "data": five_year_data
             }
         }
     }
