@@ -1,71 +1,74 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<style>
-#bar-chart {
-    position: relative;
+{% extends "layout.html" %}
+        {% block content %}
+        <style>
+            #bar-chart {
+                position: relative;
+                width: 100%;
+                overflow-x: auto;
+                overflow-y: hidden;
+            }
+            
+            .chart-container {
+                min-width: 500px; /* Adjust this width based on your data */
+                height: 100%;
+                display: inline-block;
+                /* overflow-y: hidden; */
+            
+            }
+            
+            canvas {
+                width: 100%;
+                height: 100%;
+            }
+            </style>
+            
+        <style>
+            /* Container for table with scrolling */
+/* Container for table with scrolling */
+.table-wrapper {
+
+    overflow-y: auto; /* Enable vertical scrolling */
+}
+
+table {
     width: 100%;
-    overflow-x: auto;
-    overflow-y: hidden;
+    border-collapse: collapse;
 }
 
-.chart-container {
-    min-width: 500px; /* Adjust this width based on your data */
-    height: 100%;
-    display: inline-block;
-    /* overflow-y: hidden; */
-}
-
-canvas {
+thead {
+    display: table;
     width: 100%;
-    height: 100%;
+    table-layout: fixed;
 }
-</style>
 
-<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.js" defer></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" defer></script>
+tbody {
+    display: block;
+    width: 100%;
+    overflow-y: auto; /* Scrollable body */
+    max-height: 300px; /* Same height as .table-wrapper */
+}
 
-<style>
-@import url(https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/5.3.45/css/materialdesignicons.min.css);
-@import url(https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css);
-</style>
+th, td {
+    padding: 0.75rem;
+    text-align: left;
+}
 
-</head>
-<body>
+thead th {
+    background-color: #4a5568; /* Darker gray for header */
+}
 
-      
-    <!-- Main Container -->
-<div class="flex min-h-screen bg-gray-900 text-white">
-    <!-- Sidebar -->
-    <aside class="w-64 bg-gray-800 p-6">
-        <div class="flex items-center mb-10">
-            <img src="logo.png" alt="Logo" class="w-10 h-10 mr-3">
-            <span class="text-2xl font-semibold">Sonic Sentry</span>
-        </div>
-        <nav class="space-y-4">
-            <a href="#" class="flex items-center p-3 bg-gray-700 rounded-lg">
-                <span class="material-icons mr-3">home</span> Home
-            </a>
-            <a href="#" class="flex items-center p-3 hover:bg-gray-700 rounded-lg">
-                <span class="material-icons mr-3">Add New</span> Add New
-            </a>
+tbody tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+}
 
-            <a href="#" class="flex items-center p-3 hover:bg-gray-700 rounded-lg">
-                <span class="material-icons mr-3">settings</span> Settings
-            </a>
-        </nav>
-        <button class="mt-10 w-full p-3 text-left hover:bg-gray-700 rounded-lg">
-            Logout
-        </button>
-    </aside>
+tbody tr:nth-child(even) {
+    background-color: #2d3748; /* Slightly lighter gray for even rows */
+}
 
-    <!-- Main Dashboard Content -->
-    <div class="flex-1 p-6 bg-gray-900">
+        </style>
+
         <!-- Top Navigation -->
         <div class="flex items-center justify-between mb-6">
             <h1 class="text-3xl font-bold">Dashboard</h1>
@@ -79,13 +82,13 @@ canvas {
         <!-- Main Content -->
         <div class="grid grid-cols-3 gap-6">
             <!-- Graph Section -->
-            <div class="col-span-2 bg-gray-800 p-6 rounded-lg">
-                <h2 class="text-xl font-bold mb-4">Total Shots: <span class="text-green-400">14</span></h2>
-                <div class="h-64 bg-gray-700 rounded-lg">
-                    <div class="bg-gray-900 flex items-center justify-center px-5 py-5">
-                        <div class="bg-gray-800 text-gray-500 rounded shadow-xl py-5 px-5 w-full lg:w-full" x-data="{chartData:chartData()}" x-init="chartData.fetch()">
+            <!-- <div class="col-span-2 bg-gray-800 h-50 rounded-lg"> -->
+                <!-- <h2 class="text-xl font-bold mb-4">Total Shots: <span class="text-green-400">14</span></h2> -->
+                <div class="bg-gray-800 col-span-2 rounded-lg">
+                    <div class="bg-gray-900 flex h-full items-center justify-center ">
+                        <div class="bg-gray-800 text-gray-500 rounded  py-5 px-5 w-full h-full lg:w-full" x-data="{chartData:chartData()}" x-init="chartData.fetch()">
                             <div class="flex items-center justify-between mb-4">
-                                <h3 class="text-lg font-semibold leading-tight">Income</h3>
+                                <h3 class="text-lg font-semibold leading-tight">  Gun Shots  </h3>
                                 <div class="relative" @click.away="chartData.showDropdown=false">
                                     <button class="text-xs hover:text-gray-300 flex items-center" @click="chartData.showDropdown=!chartData.showDropdown">
                                         <span x-text="chartData.options[chartData.selectedOption].label"></span>
@@ -106,20 +109,22 @@ canvas {
                                 </div>
                             </div>
             
-                            <div class="w-full h-full">
+                            <div class="w-full h-64">
                                 <canvas id="chart" class="w-full h-full"></canvas>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+
+
+            <!-- </div> -->
             
             
             
             <!-- Earnings and Stats -->
-            <div class="bg-gray-800 p-6 rounded-lg">
-                <h2 class="text-xl font-bold mb-4">FPGA Overview: <span class="text-green-400">$42,665</span></h2>
-                <div id="bar-chart" class="h-64 bg-gray-700 rounded-lg overflow-x-auto">
+            <div class="bg-gray-800 p-5 rounded-lg ">
+                <h2 class="text-xl font-bold mb-4">FPGA Overview </h2>
+                <div id="bar-chart" class=" bg-gray-700 rounded-lg overflow-x-auto">
                     <div class="chart-container">
                         <canvas id="myChart"></canvas>
                     </div>
@@ -132,87 +137,178 @@ canvas {
         <!-- Portfolio and Transactions -->
         <div class="grid grid-cols-3 gap-6 mt-6">
             <!-- Portfolio Table -->
-            <div class="col-span-2 bg-gray-800 p-6 rounded-lg">
+            <div class="col-span-2 bg-gray-800 p-6 rounded-lg table-wrapper">
                 <h2 class="text-xl font-bold mb-4">New Gun Shots</h2>
-                <table class="min-w-full bg-gray-700 rounded-lg">
+                <table class="min-w-full bg-gray-700 rounded-lg overflow-scroll">
                     <thead>
                         <tr class="bg-gray-700">
                             <th class="p-3 text-left">FPGA</th>
                             <th class="p-3 text-left">Elevation</th>
                             <th class="p-3 text-left">Direction</th>
                             <th class="p-3 text-left">Time</th>
+                            <th class="p-3 text-left">Date</th>
+
                             <!-- <th class="p-3 text-left">% of Deposit</th> -->
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr class="border-b border-gray-600">
-                            <td class="p-3">FPGA 1</td>
-                            <td class="p-3">200m</td>
-                            <td class="p-3">NW</td>
-                            <td class="p-3 text-green-400">2.32 PM</td>
-                            <!-- <td class="p-3">35%</td> -->
-                        </tr>
-                        <!-- More rows can be added similarly -->
+                    <tbody >
+                        {% for key, record in reverse_sorted_gunshot.items() %}
+                            <tr class="border-b border-gray-600 text-white">
+                                <td class="p-3">
+                                    {% if record.fpga_id in fpga %}
+                                        {{ fpga[record.fpga_id].name }} ({{record.fpga_id}})
+                                    {% else %}
+                                        Unknown FPGA
+                                    {% endif %}
+                                </td>
+                                <td class="p-3">{{ record.elevation }} m</td>
+                                <td class="p-3">{{ record.direction }}°</td>
+                                <td class="p-3 text-green-400">{{ record.time }}</td>
+                                <td class="p-3">{{ record.date }}</td>
+                            </tr>
+                        {% endfor %}
                     </tbody>
+        
                 </table>
             </div>
 
             <!-- Recent Transactions -->
             <div class="bg-gray-800 p-6 rounded-lg">
-                <h2 class="text-xl font-bold mb-4">Recent Transactions</h2>
+                <h2 class="text-xl font-bold mb-4">ALL GUN shots </h2>
                 <ul class="space-y-3">
+                    <canvas id="myPieChart" width="400" height="400"></canvas>
+
                     <li class="flex justify-between">
-                        <span>Bitcoin - Buy</span>
-                        <span>$22,997.03</span>
+                        <!-- <span>Bitcoin - Buy</span>
+                        <span>$22,997.03</span> -->
                     </li>
                     <!-- More list items can be added similarly -->
                 </ul>
             </div>
         </div>
-    </div>
-</div>
+        {% endblock %}
 
 
-  <script>
-    var ctx = document.getElementById('myChart').getContext('2d');
-    var myChart = new Chart(ctx, {
-      type: 'bar',
-      data: {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-        datasets: [{
-          label: '# of Votes',
-          data: [12, 19, 3, 5, 2, 3],
-          backgroundColor: [
-            'rgba(255, 99, 132, 0.2)',
+
+
+{% block scripts %}
+<script>
+    // Get the context of the canvas element we want to draw on
+    var ctx1 = document.getElementById('myPieChart').getContext('2d');
+    
+    // Create a new Chart instance
+    var myPieChart = new Chart(ctx1, {
+        type: 'pie', // Specifies the type of chart
+        data: {
+            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'], // Labels for each segment
+            datasets: [{
+                label: 'My Pie Chart',
+                data: [12, 19, 3, 5, 2, 3], // Data for each segment
+                backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
             'rgba(54, 162, 235, 0.2)',
             'rgba(255, 206, 86, 0.2)',
             'rgba(75, 192, 192, 0.2)',
             'rgba(153, 102, 255, 0.2)',
             'rgba(255, 159, 64, 0.2)'
-          ],
-          borderColor: [
-            'rgba(255, 99, 132, 1)',
+
+                ],
+                borderColor: [
+                'rgba(255, 99, 132, 1)',
             'rgba(54, 162, 235, 1)',
             'rgba(255, 206, 86, 1)',
             'rgba(75, 192, 192, 1)',
             'rgba(153, 102, 255, 1)',
             'rgba(255, 159, 64, 1)'
-          ],
-          borderWidth: 1
-        }]
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false, // Allow the chart to resize to the container
-        scales: {
-          y: {
-            beginAtZero: true
-          }
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'top',
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            let label = context.label || '';
+                            if (label) {
+                                label += ': ';
+                            }
+                            if (context.parsed) {
+                                label += `${context.parsed} (${context.raw}%)`;
+                            }
+                            return label;
+                        }
+                    }
+                }
+            }
         }
-      }
     });
+</script>
 
-  </script>
+
+<script>
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+            datasets: [{
+                label: 'Bar Chart',
+                data: [12, 19, 3, 5, 2, 3],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'top',
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            let label = context.dataset.label || '';
+                            if (label) {
+                                label += ': ';
+                            }
+                            if (context.parsed.y !== null) {
+                                label += context.parsed.y;
+                            }
+                            return label;
+                        }
+                    }
+                }
+            },
+            maintainAspectRatio: false, // Allow the chart to resize to the container
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>
+
 
 <script>
 
@@ -325,8 +421,10 @@ canvas {
             }
         }
     }
-    </script>
+</script>
     
-  
-</body>
-</html>
+{% endblock %}
+
+
+
+

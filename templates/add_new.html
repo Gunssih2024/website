@@ -1,0 +1,67 @@
+{% extends "layout.html" %}
+
+{% block title %}Add New FPGA{% endblock %}
+
+{% block content %}
+<style>
+    /* Flash message container */
+.flash-messages {
+    margin-bottom: 1.5rem; /* Space between flash messages and form */
+}
+
+/* Individual flash message */
+.flash-message {
+    padding: 1rem;
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    text-align: center; /* Center-align text for a cleaner look */
+}
+
+/* Success message */
+.flash-message.success {
+    background-color: #d4edda; /* Light green background */
+    color: #155724; /* Dark green text */
+    border: 1px solid #c3e6cb; /* Light green border */
+}
+
+/* Error message */
+.flash-message.error {
+    background-color: #f8d7da; /* Light red background */
+    color: #721c24; /* Dark red text */
+    border: 1px solid #f5c6cb; /* Light red border */
+}
+
+</style>
+    <!-- Flash messages -->
+
+
+    <!-- Centered Form Container -->
+    <div class="flex flex-col justify-center items-center min-h-full bg-gray-900 p-4">
+        {% with messages = get_flashed_messages(with_categories=True) %}
+        {% if messages %}
+            <div class="flash-messages w-full max-w-md">
+                {% for category, message in messages %}
+                    <div class="flash-message {{ category }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+        {% endwith %}
+        <div class="w-full max-w-md p-6 bg-gray-800 rounded-lg shadow-lg">
+            <h1 class="text-3xl font-semibold text-white mb-6">Add New FPGA</h1>
+            
+            <form action="{{ url_for('add_new') }}" method="post" class="space-y-4">
+                <div>
+                    <label for="name" class="block text-lg font-medium text-gray-300">FPGA Name</label>
+                    <input type="text" id="name" name="name" required class="w-full p-3 mt-1 border border-gray-600 rounded-lg bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                
+                <button type="submit" class="w-full p-3 bg-blue-600 hover:bg-blue-700 rounded-lg text-white font-semibold">
+                    Add FPGA
+                </button>
+            </form>
+        </div>
+    </div>
+{% endblock %}
