@@ -32,7 +32,23 @@ def index():
     return render_template("index.html", reverse_sorted_gunshot=reverse_sorted_gunshot, fpga=fpga)
 
 
+@app.route("/settings")
+def settings_page():
+    fpga = dbm.get_fpgas()
+    print(fpga)
+    return render_template("settings.html", fpgas=fpga)
 
+
+@app.route("/save_fpga_settings", methods=['POST'])
+def save_fpga_settings():
+    fpga_id = request.form['fpga_id']
+    name = request.form['name']
+    uid = request.form['uid']
+    region = request.form['region']
+    coordinates = request.form['coordinates']
+
+
+    return redirect(url_for('settings_page'))
 
 @app.route('/add_new', methods=['GET', 'POST'])
 def add_new():

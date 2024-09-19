@@ -18,7 +18,7 @@
         <!-- Sidebar -->
         <aside class="w-64 bg-gray-800 p-6">
             <div class="flex items-center mb-10">
-                <img src="logo.png" alt="Logo" class="w-10 h-10 mr-3">
+                <!-- <img src="logo.png" alt="Logo" class="w-10 h-10 mr-3"> -->
                 <span class="text-2xl font-semibold">Sonic Sentry</span>
             </div>
             <nav class="space-y-4">
@@ -31,7 +31,7 @@
                     <span class="material-icons mr-3">add new</span> Add New
                 </a>
     
-                <a href="{{ url_for('add_new') }}" class="flex items-center p-3 {{ 'bg-gray-700' if current_url == url_for('add_new') else 'hover:bg-gray-700' }} rounded-lg">
+                <a href="{{ url_for('settings_page') }}" class="flex items-center p-3 {{ 'bg-gray-700' if current_url == url_for('settings_page') else 'hover:bg-gray-700' }} rounded-lg">
                     <span class="material-icons mr-3">settings</span> Settings
                 </a>
             </nav>
