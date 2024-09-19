@@ -391,8 +391,8 @@
                 this.renderChart();
             },
             data: null,
-            fetch: function () {
-                fetch('http://127.0.0.1:3000/data')
+            fetch: function () { 
+                fetch('{{ url_for('get_data') }}')
                     .then(res => res.json())
                     .then(res => {
                         this.data = res.dates;
@@ -499,7 +499,7 @@
             },
             data: null,
             fetch: function () {
-                fetch('http://127.0.0.1:3000/gundata')
+                fetch('{{ url_for('gun_data') }}')
                     .then(res => res.json())
                     .then(res => {
                         this.data = res.dates;
@@ -637,7 +637,7 @@
             },
             data: null,
             fetch: function () {
-                fetch('http://127.0.0.1:3000/gundata')
+                fetch('{{ url_for('gun_data') }}')
                     .then(res => res.json())
                     .then(res => {
                         this.data = res.dates;
