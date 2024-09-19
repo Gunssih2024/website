@@ -611,13 +611,6 @@ def calculate_gunshot_data(gunshot_list: Dict, fpgas_list: Dict):
 }
 
 
-
-
-
-
-
-    pass
-
 class DbManager:
     def __init__(self, fpgas_file, gunshot_file) -> None:
         self.fpgas_file = fpgas_file

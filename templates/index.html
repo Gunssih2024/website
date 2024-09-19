@@ -231,7 +231,6 @@
 
     <!-- Recent Transactions -->
     <div class="bg-gray-800 p-6 rounded-lg">
-        <h2 class="text-xl font-bold mb-4">ALL GUN shots </h2>
         <ul class="space-y-3">
 
             <div class="bg-gray-800 text-gray-500 rounded   w-full h-full lg:w-full"
@@ -286,6 +285,10 @@
 
 {% block scripts %}
 <script>
+    function reformatter_fpga_list(data) {
+    // Use Object.entries to get an array of [id, {name: 'value'}] pairs
+    return Object.entries(data).map(([id, { name }]) => `${name} (${id})`);
+}
     const colors = [
         "#E57373", // Light Red
         "#F06292", // Light Pink
@@ -449,9 +452,6 @@
 </script>
 
 
-
-
-
 <script>
 
 
@@ -530,7 +530,7 @@
                 let chart = new Chart(ctx, {
                     type: "bar",
                     data: {
-                        labels: Object.keys(fpga_list),
+                        labels: reformatter_fpga_list(fpga_list),
                         datasets: [{
                             label: 'Bar Chart',
                             data: Array.from(this.data[this.date].data.values),
@@ -592,7 +592,6 @@
 
 
 <script>
-
 
 
 
@@ -669,7 +668,7 @@
                 let chart = new Chart(ctx, {
                     type: "pie",
                     data: {
-                        labels: Object.keys(fpga_list),
+                        labels: reformatter_fpga_list(fpga_list),
                         datasets: [{
                             label: 'pie Chart',
                             data: Array.from(this.data[this.date].data.values),
@@ -680,7 +679,7 @@
                                 'rgba(100, 181, 246, 0.2)',  // Light Blue
                                 'rgba(79, 195, 247, 0.2)',   // Light Cyan
                                 'rgba(77, 182, 172, 0.2)',   // Light Teal
-                                'rgba(129, 199, 132, 0.2)',  // Light Green
+                                'rgba(129, 199, 132,    0.2)',  // Light Green
                                 'rgba(255, 213, 79, 0.2)',   // Light Yellow
                                 'rgba(255, 138, 101, 0.2)',  // Light Orange
                                 'rgba(161, 136, 127, 0.2)'   // Light Brown
