@@ -95,7 +95,7 @@
             <div class="bg-gray-800 text-gray-500 rounded  py-5 px-5 w-full h-full lg:w-full"
                 x-data="{chartData:chartData()}" x-init="chartData.fetch()">
                 <div class="flex items-center justify-between mb-4">
-                    <h3 class="text-lg font-semibold leading-tight"> Gun Shots </h3>
+                    <h3 class="text-lg font-semibold leading-tight"> Gun Shot Elevation</h3>
                     <div class="relative" @click.away="chartData.showDropdown=false">
                         <button class="text-xs hover:text-gray-300 flex items-center"
                             @click="chartData.showDropdown=!chartData.showDropdown">
@@ -195,7 +195,7 @@
 <div class="grid grid-cols-3 gap-6 mt-6">
     <!-- Portfolio Table -->
     <div class="col-span-2 bg-gray-800 p-6 rounded-lg table-wrapper">
-        <h2 class="text-xl font-bold mb-4">New Gun Shots</h2>
+        <h2 class="text-xl font-bold mb-4">Latest Gun Shots</h2>
         <table class="min-w-full bg-gray-700 rounded-lg overflow-scroll">
             <thead>
                 <tr class="bg-gray-700">

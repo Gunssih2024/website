@@ -626,7 +626,7 @@ class DbManager:
             file.write("{}")
             file.close()
 
-    def add_fpga(self, name: str) -> int:
+    def add_fpga(self, name: str, uid: str = "", region: str = "", coordinates: str = "") -> int:
         try:
             fpgas_list = self.get_fpgas()
 
@@ -637,7 +637,7 @@ class DbManager:
                 new_id = 100001
             new_id_str = str(new_id)
 
-            fpgas_list[new_id_str] = {"name": name}
+            fpgas_list[new_id_str] = {"name": name, "uid": uid, "region": region, "coordinates": coordinates}
 
             with open(self.fpgas_file, "w") as fpgas:
                 json.dump(fpgas_list, fpgas)
@@ -646,29 +646,44 @@ class DbManager:
         except:
             return "error"
 
+    def update_fpga(self, fpga_id: str, name: str, uid: str, region: str, coordinates: str) -> bool:
+        """Update an existing FPGA's information."""
+        fpgas_list = self.get_fpgas()
 
-    def add_gunshot(self, fpga_id:str, elevation:int, direction:int) -> int:
+        if fpga_id in fpgas_list:
+            fpgas_list[fpga_id].update({
+                "name": name,
+                "uid": uid,
+                "region": region,
+                "coordinates": coordinates
+            })
+
+            with open(self.fpgas_file, "w") as fpgas:
+                json.dump(fpgas_list, fpgas)
+            return True
+        return False
+
+    def add_gunshot(self, fpga_id: str, elevation: int, direction: int) -> int:
         if self.get_fpgas(fpga_id) == {}:
             return 1
 
         gunshots_list = self.get_gunshot()
 
         gunshot_id = str(len(gunshots_list) + 1)
-        gunshot_info = {"fpga_id":fpga_id,
-                        "elevation":elevation,
-                        "direction":direction,
-                        "date":datetime.today().strftime('%d-%m-%Y'),
-                        "time":datetime.today().strftime('%H:%M:%S')
-                    }
+        gunshot_info = {"fpga_id": fpga_id,
+                        "elevation": elevation,
+                        "direction": direction,
+                        "date": datetime.today().strftime('%d-%m-%Y'),
+                        "time": datetime.today().strftime('%H:%M:%S')}
 
         gunshots_list[gunshot_id] = gunshot_info
 
         with open(self.gunshot_file, "w") as gunshots:
             json.dump(gunshots_list, gunshots)
-        
+
         return 0
 
-    def get_fpgas(self, id:str="") -> dict:
+    def get_fpgas(self, id: str = "") -> dict:
         with open(self.fpgas_file, "r") as fpgas:
             fpgas_list = json.load(fpgas)
 
@@ -682,24 +697,19 @@ class DbManager:
             gunshot_list = json.load(gunshots)
 
         return gunshot_list
-    
+
     def get_gunshot_specific_elevation(self) -> dict:
-        # this returns elevation data of today, 7 days, this month, six months , year, 5 years
         with open(self.gunshot_file, "r") as gunshots:
             gunshot_list = json.load(gunshots)
         with open(self.fpgas_file, "r") as fpgas:
             fpgas_list = json.load(fpgas)
 
         return convert_gunshot_data(gunshot_list, fpgas_list)
-    
-    def gunshot_counter(self) -> dict:
-        # this returns gunshots data of today, 7 days, this month, six months , year, 5 years
 
+    def gunshot_counter(self) -> dict:
         with open(self.gunshot_file, "r") as gunshots:
             gunshot_list = json.load(gunshots)
         with open(self.fpgas_file, "r") as fpgas:
             fpgas_list = json.load(fpgas)
 
         return calculate_gunshot_data(gunshot_list, fpgas_list)
-
-    # operations done on data

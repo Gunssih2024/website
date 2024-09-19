@@ -3,10 +3,10 @@ from database_manager import DbManager
 from datetime import datetime
 
 app = Flask(__name__)
-app.secret_key = 'your_secret_key'  # Replace with a strong, unique secret key
+app.secret_key = 'your_secret_key' 
 
 dbm = DbManager("fpgas.json", "test_gunshots.json")
-# dbm = DbManager("fpgas.json", "gunshots.json")
+
 
 
 def get_datetime(item):
@@ -47,35 +47,36 @@ def save_fpga_settings():
     region = request.form['region']
     coordinates = request.form['coordinates']
 
+    # Call the update_fpga method to update FPGA settings
+
+    dbm.update_fpga(fpga_id, name, uid, region, coordinates)
 
     return redirect(url_for('settings_page'))
 
+
 @app.route('/add_new', methods=['GET', 'POST'])
 def add_new():
-    # print(dbm.add_gunshot("100004", 100, 39))
-    # print(dbm.add_gunshot("100004", 80, 135))
-    # print(dbm.add_gunshot("100004", 0, 45))
-    # print(dbm.add_gunshot("100005", 55, 90))
-    # print(dbm.add_gunshot("100005", 27, 192))
-    # print(dbm.get_gunshot("100003"))
     if request.method == 'POST':
         # Handle form submission
-
-        
         name = request.form.get('name')
-        response_add_fpga = dbm.add_fpga(name)
+        uid = request.form.get('uid')
+        region = request.form.get('region')
+        coordinates = request.form.get('coordinates')
+        
+        # Add the FPGA with the additional fields
+        response_add_fpga = dbm.add_fpga(name, uid, region, coordinates)
+        
         if response_add_fpga == "error":
             flash('There was an Unknown error.', 'error')
         else:
             flash(f'Successfully added new FPGA with ID: {response_add_fpga}.', 'success')
 
-        # Create an instance of FPGAHandler and add the new FPGA
-        # dbm.add_fpga(name)
         # Redirect to the same page or another page after submission
         return redirect(url_for('add_new'))
     
     # Handle GET request: Render the form page
     return render_template('add_new.html')
+
 
 
 
